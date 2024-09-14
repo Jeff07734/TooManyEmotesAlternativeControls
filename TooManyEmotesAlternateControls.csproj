@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>TooManyEmotesAlternateControls</AssemblyName>
+    <Product>My first plugin</Product>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>TooManyEmotesAlternateControls</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" IncludeAssets="compile" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LCVR">
+      <HintPath>..\Too Many Emotes Jeff Patch\Lethal-Company-TooManyEmotes-Jeff-Patch\TooManyEmotes\bin\Debug\LCVR.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="TooManyEmotes">
+      <HintPath>C:\Users\Owner\AppData\Roaming\Thunderstore Mod Manager\DataFolder\LethalCompany\profiles\Emote Mod Jeff Patch Test\BepInEx\plugins\FlipMods-TooManyEmotes\TooManyEmotes.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Netcode.Components">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Netcode.Runtime">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Networking.Transport">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Networking.Transport.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
