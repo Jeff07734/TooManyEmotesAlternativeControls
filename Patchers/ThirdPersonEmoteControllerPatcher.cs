@@ -11,7 +11,7 @@ using TooManyEmotes.UI;
 using TooManyEmotesAlternateControls.Compatibility;
 using UnityEngine;
 
-namespace TooManyEmotesAlternateControls
+namespace TooManyEmotesAlternateControls.Patchers
 {
     [HarmonyPatch]
     class ThirdPersonEmoteControllerPatcher
@@ -29,11 +29,11 @@ namespace TooManyEmotesAlternateControls
 
         private static bool _isMovingWhileEmoting = (bool)Traverse.Create(typeof(ThirdPersonEmoteController)).Property("isMovingWhileEmoting").GetValue();
         private static bool isMovingWhileEmoting { get { return IsMovingWhileEmoting(); } }
-        
+
 
         private static float _timeOfLastMovingCheck = 0f;
 
-        private static Vector3 prevCameraDirection = new Vector3 (0, 0, 0);
+        private static Vector3 prevCameraDirection = new Vector3(0, 0, 0);
 
         // Initilizes the variables after the original mod
         [HarmonyPatch(typeof(ThirdPersonEmoteController), "InitLocalPlayerController")]
@@ -109,7 +109,7 @@ namespace TooManyEmotesAlternateControls
                     // If player is moving, avoid doubling up rotation caused by player control
                     if (!isPlayerMoving) { emoteCameraPivot.Rotate(new Vector3(0f, vector.x, 0f)); }
                     float cameraPitch = emoteCameraPivot.localEulerAngles.x - vector.y;
-                    cameraPitch = (cameraPitch > 180) ? cameraPitch - 360 : cameraPitch;
+                    cameraPitch = cameraPitch > 180 ? cameraPitch - 360 : cameraPitch;
                     cameraPitch = Mathf.Clamp(cameraPitch, -45, 45);
                     emoteCameraPivot.transform.localEulerAngles = new Vector3(cameraPitch, emoteCameraPivot.localEulerAngles.y, 0f);
 
