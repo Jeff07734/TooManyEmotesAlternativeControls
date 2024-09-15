@@ -62,29 +62,6 @@ namespace TooManyEmotesAlternateControls.Patchers
                 if (emoteIndex != EmoteMenu.hoveredEmoteUIIndex)
                     EmoteMenu.OnHoveredNewElement(emoteIndex);
                 return false;
-
-
-
-                //// Applies the last emote selection until they manually hover over an emote
-                //int emoteIndex = EmoteMenu.hoveredEmoteUIIndex;
-                //if (!hasMovedCursorInMenu)
-                //{
-                //    // Set up value to be changed to the last used emote
-                //    if (EmoteMenu.hoveredEmoteUIIndex == -1 || hover)
-                //    {
-                //        emoteIndex = lastEmoteIndex;
-                //    }
-                //    // Detect if the player has hovered over an emote manually
-                //    if (lastEmoteIndex != EmoteMenu.hoveredEmoteUIIndex)
-                //    {
-                //        hasMovedCursorInMenu = true;
-                //    }
-                //}
-                //// If we caused a change to the hovered emote, apply it to the UI
-                //if (EmoteMenu.hoveredEmoteUIIndex != emoteIndex)
-                //{
-                //    EmoteMenu.OnHoveredNewElement(emoteIndex);
-                //}
             }
         }
 
