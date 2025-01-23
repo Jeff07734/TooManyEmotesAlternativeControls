@@ -17,17 +17,17 @@ namespace TooManyEmotesAlternateControls.Patchers
     class ThirdPersonEmoteControllerPatcher
     {
 
-        private static EmoteController emoteControllerLocal = EmoteControllerPlayer.emoteControllerLocal;
-        private static PlayerControllerB localPlayerController = StartOfRound.Instance?.localPlayerController;
-        private static Camera emoteCamera = (Camera)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("emoteCamera").GetValue();
-        private static Camera gameplayCamera = (Camera)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("gameplayCamera").GetValue();
-        private static Transform localPlayerCameraContainer = (Transform)Traverse.Create(typeof(ThirdPersonEmoteController)).Property("localPlayerCameraContainer").GetValue();
-        private static Transform emoteCameraPivot = (Transform)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("emoteCameraPivot").GetValue();
-        private static int cameraCollideLayerMask = (int)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("cameraCollideLayerMask").GetValue();
-        private static float targetCameraDistance = (float)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("targetCameraDistance").GetValue();
-        private static Vector2 clampCameraDistance = (Vector2)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("clampCameraDistance").GetValue();
+        private static EmoteController emoteControllerLocal;
+        private static PlayerControllerB localPlayerController;
+        private static Camera emoteCamera;
+        private static Camera gameplayCamera;
+        private static Transform localPlayerCameraContainer;
+        private static Transform emoteCameraPivot;
+        private static int cameraCollideLayerMask;
+        private static float targetCameraDistance;
+        private static Vector2 clampCameraDistance;
 
-        private static bool _isMovingWhileEmoting = (bool)Traverse.Create(typeof(ThirdPersonEmoteController)).Property("isMovingWhileEmoting").GetValue();
+        private static bool _isMovingWhileEmoting;
         private static bool isMovingWhileEmoting { get { return IsMovingWhileEmoting(); } }
 
 
@@ -36,11 +36,22 @@ namespace TooManyEmotesAlternateControls.Patchers
         private static Vector3 prevCameraDirection = new Vector3(0, 0, 0);
 
         // Initilizes the variables after the original mod
+        // TODO: I may need to initialize variables in here. I believe some references get lost after the first initialization
         [HarmonyPatch(typeof(ThirdPersonEmoteController), "InitLocalPlayerController")]
         [HarmonyPostfix]
         private static void InitValues()
         {
+            emoteControllerLocal = EmoteControllerPlayer.emoteControllerLocal;
+            localPlayerController = StartOfRound.Instance?.localPlayerController;
+            emoteCamera = (Camera)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("emoteCamera").GetValue();
+            gameplayCamera = (Camera)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("gameplayCamera").GetValue();
+            localPlayerCameraContainer = (Transform)Traverse.Create(typeof(ThirdPersonEmoteController)).Property("localPlayerCameraContainer").GetValue();
+            emoteCameraPivot = (Transform)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("emoteCameraPivot").GetValue();
+            cameraCollideLayerMask = (int)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("cameraCollideLayerMask").GetValue();
+            targetCameraDistance = (float)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("targetCameraDistance").GetValue();
+            clampCameraDistance = (Vector2)Traverse.Create(typeof(ThirdPersonEmoteController)).Field("clampCameraDistance").GetValue();
 
+            _isMovingWhileEmoting = (bool)Traverse.Create(typeof(ThirdPersonEmoteController)).Property("isMovingWhileEmoting").GetValue();
         }
 
         // Stops the original mod's camera code from running
